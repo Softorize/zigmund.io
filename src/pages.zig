@@ -49,16 +49,12 @@ const homepage_html =
     \\      <div class="terminal-window">
     \\        <div class="terminal-bar">
     \\          <div class="terminal-buttons">
-    \\            <span class="btn-close"></span>
-    \\            <span class="btn-min"></span>
-    \\            <span class="btn-max"></span>
+    \\            <span class="tbtn tbtn-close"></span>
+    \\            <span class="tbtn tbtn-min"></span>
+    \\            <span class="tbtn tbtn-max"></span>
     \\          </div>
-    \\          <div class="terminal-title">zigmund.exe</div>
-    \\          <div class="terminal-buttons" style="visibility:hidden">
-    \\            <span class="btn-close"></span>
-    \\            <span class="btn-min"></span>
-    \\            <span class="btn-max"></span>
-    \\          </div>
+    \\          <div class="terminal-title">zigmund@localhost: ~</div>
+    \\          <div class="terminal-bar-right"></div>
     \\        </div>
     \\        <div class="terminal-body">
     \\          <pre class="ascii-art">
@@ -73,7 +69,7 @@ const homepage_html =
     \\ │                                     N  D     │
     \\ └──────────────────────────────────────────────┘
     \\</pre>
-    \\          <p class="terminal-tagline">C:\ZIGMUND&gt; <span class="typing">A FastAPI-inspired web framework for Zig_</span></p>
+    \\          <p class="terminal-tagline"><span class="prompt-user">zigmund</span><span class="prompt-at">@</span><span class="prompt-host">dev</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$</span> <span class="typing">A FastAPI-inspired web framework for Zig_</span></p>
     \\        </div>
     \\      </div>
     \\      <div class="hero-actions">
@@ -92,9 +88,9 @@ const homepage_html =
     \\  <section id="features" class="features">
     \\    <div class="container">
     \\      <h2 class="section-title">
-    \\        <span class="title-deco">═══</span>
-    \\        SYSTEM SPECIFICATIONS
-    \\        <span class="title-deco">═══</span>
+    \\        <span class="title-deco">───</span>
+    \\        <span class="title-bracket">[</span> FEATURES <span class="title-bracket">]</span>
+    \\        <span class="title-deco">───</span>
     \\      </h2>
     \\      <div class="features-grid">
     \\
@@ -142,9 +138,9 @@ const homepage_html =
     \\  <section id="quickstart" class="quickstart">
     \\    <div class="container">
     \\      <h2 class="section-title">
-    \\        <span class="title-deco">═══</span>
-    \\        BOOT SEQUENCE
-    \\        <span class="title-deco">═══</span>
+    \\        <span class="title-deco">───</span>
+    \\        <span class="title-bracket">[</span> QUICK START <span class="title-bracket">]</span>
+    \\        <span class="title-deco">───</span>
     \\      </h2>
     \\
     \\      <div class="steps">
@@ -154,7 +150,12 @@ const homepage_html =
     \\            <h3>Add dependency</h3>
     \\            <div class="code-window">
     \\              <div class="code-bar">
-    \\                <span>build.zig.zon</span>
+    \\                <div class="code-bar-dots">
+    \\                  <span class="cdot cdot-close"></span>
+    \\                  <span class="cdot cdot-min"></span>
+    \\                  <span class="cdot cdot-max"></span>
+    \\                </div>
+    \\                <span class="code-bar-title">build.zig.zon</span>
     \\              </div>
     \\              <pre class="code-body"><span class="c-keyword">.dependencies</span> = .{
     \\    <span class="c-keyword">.zigmund</span> = .{
@@ -171,7 +172,12 @@ const homepage_html =
     \\            <h3>Write your app</h3>
     \\            <div class="code-window">
     \\              <div class="code-bar">
-    \\                <span>src/main.zig</span>
+    \\                <div class="code-bar-dots">
+    \\                  <span class="cdot cdot-close"></span>
+    \\                  <span class="cdot cdot-min"></span>
+    \\                  <span class="cdot cdot-max"></span>
+    \\                </div>
+    \\                <span class="code-bar-title">src/main.zig</span>
     \\              </div>
     \\              <pre class="code-body"><span class="c-keyword">const</span> std = <span class="c-builtin">@import</span>(<span class="c-string">"std"</span>);
     \\<span class="c-keyword">const</span> zigmund = <span class="c-builtin">@import</span>(<span class="c-string">"zigmund"</span>);
@@ -209,7 +215,12 @@ const homepage_html =
     \\            <h3>Run it</h3>
     \\            <div class="code-window">
     \\              <div class="code-bar">
-    \\                <span>terminal</span>
+    \\                <div class="code-bar-dots">
+    \\                  <span class="cdot cdot-close"></span>
+    \\                  <span class="cdot cdot-min"></span>
+    \\                  <span class="cdot cdot-max"></span>
+    \\                </div>
+    \\                <span class="code-bar-title">terminal</span>
     \\              </div>
     \\              <pre class="code-body"><span class="c-comment">$ zig build run</span>
     \\<span class="c-string">INFO</span>  Zigmund v0.1.0 serving on http://0.0.0.0:8000
@@ -225,28 +236,28 @@ const homepage_html =
     \\  <section class="why">
     \\    <div class="container">
     \\      <h2 class="section-title">
-    \\        <span class="title-deco">═══</span>
-    \\        WHY ZIGMUND
-    \\        <span class="title-deco">═══</span>
+    \\        <span class="title-deco">───</span>
+    \\        <span class="title-bracket">[</span> WHY ZIGMUND <span class="title-bracket">]</span>
+    \\        <span class="title-deco">───</span>
     \\      </h2>
     \\      <div class="why-grid">
     \\        <div class="why-card">
     \\          <div class="why-header">
-    \\            <span class="dos-prompt">C:\&gt;</span> PERFORMANCE
+    \\            <span class="why-prompt">~$</span> PERFORMANCE
     \\          </div>
     \\          <p>Zig compiles to native code with no runtime overhead. No garbage collector, no hidden allocations. Your API serves requests at wire speed.</p>
     \\        </div>
     \\        <div class="why-card">
     \\          <div class="why-header">
-    \\            <span class="dos-prompt">C:\&gt;</span> FAMILIAR API
+    \\            <span class="why-prompt">~$</span> FAMILIAR API
     \\          </div>
     \\          <p>If you know FastAPI, you already know Zigmund. Same patterns, same developer experience &mdash; powered by Zig's compile-time safety.</p>
     \\        </div>
     \\        <div class="why-card">
     \\          <div class="why-header">
-    \\            <span class="dos-prompt">C:\&gt;</span> SINGLE BINARY
+    \\            <span class="why-prompt">~$</span> SINGLE BINARY
     \\          </div>
-    \\          <p>Deploy a single static binary. No interpreters, no virtual machines, no container runtimes required. Just copy and run.</p>
+    \\          <p>Deploy a single static binary. No interpreters, no virtual machines, no container runtimes required. Just scp and run.</p>
     \\        </div>
     \\      </div>
     \\    </div>
