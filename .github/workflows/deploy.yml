@@ -21,43 +21,31 @@ jobs:
       - name: Build
         run: zig build -Doptimize=ReleaseSafe
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            systemctl stop zigmund-website || true
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Upload binary
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "zig-out/bin/zigmund-website"
-          target: "/opt/zigmund-website/"
-          strip_components: 2
+      - name: Deploy
+        run: |
+          SSH_CMD="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}"
 
-      - name: Upload static files
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "public/"
-          target: "/opt/zigmund-website/"
+          # Stop service
+          $SSH_CMD "systemctl stop zigmund-website || true"
 
-      - name: Restart service
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            chmod +x /opt/zigmund-website/zigmund-website
-            systemctl start zigmund-website
-            sleep 2
-            curl -sf http://localhost:3000/health || exit 1
-            echo "Deploy successful!"
+          # Upload binary
+          rsync -avz -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            zig-out/bin/zigmund-website \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/zig-out/bin/
+
+          # Upload static files
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            public/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/public/
+
+          # Restart and verify
+          $SSH_CMD "chmod +x /opt/zigmund-website/zig-out/bin/zigmund-website && systemctl start zigmund-website && sleep 2 && curl -sf http://localhost:3000/health"
+
+          echo "Deploy successful!"
