@@ -1,0 +1,18 @@
+.{
+    .name = .zigmund_website,
+    .version = "0.1.0",
+    .fingerprint = 0x46a71cfdeb9556a6,
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .zigmund = .{
+            .url = "https://github.com/Softorize/zigmund/archive/refs/heads/main.tar.gz",
+            .hash = "zigmund-0.1.0-z8N3ErT1XgBPIFUi1ZE_bABbU4lvyJ0EGlQzL0fk8yy5",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "public",
+    },
+}
