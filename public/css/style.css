@@ -234,6 +234,14 @@ body {
   50% { border-color: transparent; }
 }
 
+.hero-title {
+  font-family: var(--font-retro);
+  font-size: 28px;
+  color: var(--text-bright);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
 .hero-actions {
   display: flex;
   gap: 16px;

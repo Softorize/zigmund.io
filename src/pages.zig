@@ -13,11 +13,57 @@ const homepage_html =
     \\  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     \\  <title>Zigmund - A FastAPI-inspired Web Framework for Zig</title>
     \\  <meta name="description" content="Zigmund is a FastAPI-inspired web framework for Zig. Build fast, type-safe HTTP APIs with compile-time guarantees.">
+    \\  <meta name="robots" content="index, follow">
+    \\  <link rel="canonical" href="https://zigmund.io/">
+    \\  <meta name="theme-color" content="#0d1117">
+    \\  <!-- Open Graph -->
+    \\  <meta property="og:type" content="website">
+    \\  <meta property="og:url" content="https://zigmund.io/">
+    \\  <meta property="og:title" content="Zigmund — FastAPI-inspired Web Framework for Zig">
+    \\  <meta property="og:description" content="Build fast, type-safe HTTP APIs with compile-time guarantees. FastAPI patterns meet Zig performance.">
+    \\  <meta property="og:site_name" content="Zigmund">
+    \\  <meta property="og:image" content="https://zigmund.io/static/img/og-image.png">
+    \\  <meta property="og:image:width" content="1200">
+    \\  <meta property="og:image:height" content="630">
+    \\  <!-- Twitter Card -->
+    \\  <meta name="twitter:card" content="summary_large_image">
+    \\  <meta name="twitter:title" content="Zigmund — FastAPI-inspired Web Framework for Zig">
+    \\  <meta name="twitter:description" content="Build fast, type-safe HTTP APIs with compile-time guarantees. FastAPI patterns meet Zig performance.">
+    \\  <meta name="twitter:image" content="https://zigmund.io/static/img/og-image.png">
     \\  <link rel="preconnect" href="https://fonts.googleapis.com">
     \\  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     \\  <link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     \\  <link rel="stylesheet" href="/static/css/style.css">
     \\  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>⚡</text></svg>">
+    \\  <script type="application/ld+json">
+    \\  {
+    \\    "@context": "https://schema.org",
+    \\    "@graph": [
+    \\      {
+    \\        "@type": "WebSite",
+    \\        "@id": "https://zigmund.io/#website",
+    \\        "url": "https://zigmund.io/",
+    \\        "name": "Zigmund",
+    \\        "description": "A FastAPI-inspired web framework for Zig"
+    \\      },
+    \\      {
+    \\        "@type": "SoftwareSourceCode",
+    \\        "@id": "https://zigmund.io/#software",
+    \\        "name": "Zigmund",
+    \\        "description": "A FastAPI-inspired web framework for Zig. Build fast, type-safe HTTP APIs with compile-time guarantees.",
+    \\        "url": "https://zigmund.io/",
+    \\        "codeRepository": "https://github.com/Softorize/zigmund",
+    \\        "programmingLanguage": "Zig",
+    \\        "license": "https://opensource.org/licenses/MIT",
+    \\        "author": {
+    \\          "@type": "Organization",
+    \\          "name": "Softorize",
+    \\          "url": "https://github.com/Softorize"
+    \\        }
+    \\      }
+    \\    ]
+    \\  }
+    \\  </script>
     \\</head>
     \\<body>
     \\
@@ -68,6 +114,7 @@ const homepage_html =
     \\          <p class="terminal-tagline"><span class="prompt-user">zigmund</span><span class="prompt-at">@</span><span class="prompt-host">dev</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$</span> <span class="typing">A FastAPI-inspired web framework for Zig_</span></p>
     \\        </div>
     \\      </div>
+    \\      <h1 class="hero-title">A FastAPI-inspired Web Framework for Zig</h1>
     \\      <div class="hero-actions">
     \\        <a href="#quickstart" class="btn btn-primary">
     \\          <span class="btn-icon">▶</span> Get Started
