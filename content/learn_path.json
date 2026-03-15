@@ -1,0 +1,73 @@
+{
+  "sections": [
+    {
+      "title": "Foundation",
+      "description": "Get started with Zigmund and understand Zig basics.",
+      "pages": [
+        "installation",
+        "tutorial/first-steps",
+        "zig-guide/comptime-markers",
+        "zig-guide/error-handling",
+        "zig-guide/memory-management",
+        "zig-guide/structs-vs-pydantic"
+      ]
+    },
+    {
+      "title": "Core Tutorial",
+      "description": "Master the essential framework features.",
+      "pages": [
+        "tutorial/path-parameters",
+        "tutorial/query-parameters",
+        "tutorial/request-body",
+        "tutorial/query-params-str-validations",
+        "tutorial/path-params-numeric-validations",
+        "tutorial/body-fields",
+        "tutorial/body-nested-models",
+        "tutorial/body-updates",
+        "tutorial/header-params",
+        "tutorial/cookie-params",
+        "tutorial/response-model",
+        "tutorial/extra-models",
+        "tutorial/response-status-code",
+        "tutorial/handling-errors"
+      ]
+    },
+    {
+      "title": "Application Architecture",
+      "description": "Build real-world applications.",
+      "pages": [
+        "tutorial/dependencies",
+        "tutorial/security",
+        "tutorial/middleware",
+        "tutorial/cors",
+        "tutorial/bigger-applications",
+        "tutorial/static-files",
+        "tutorial/sql-databases",
+        "tutorial/background-tasks",
+        "tutorial/testing"
+      ]
+    },
+    {
+      "title": "Advanced Topics",
+      "description": "Level up with advanced patterns.",
+      "pages": [
+        "advanced/custom-response",
+        "advanced/websockets",
+        "advanced/middleware",
+        "advanced/advanced-dependencies",
+        "advanced/sub-applications",
+        "advanced/events",
+        "advanced/stream-data",
+        "advanced/security"
+      ]
+    },
+    {
+      "title": "Deployment",
+      "description": "Ship your application to production.",
+      "pages": [
+        "deployment/docker",
+        "deployment/production-settings"
+      ]
+    }
+  ]
+}

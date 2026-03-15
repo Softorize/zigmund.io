@@ -2,15 +2,20 @@ const std = @import("std");
 const zigmund = @import("zigmund");
 
 const pages = @import("pages.zig");
+const docs = @import("docs.zig");
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
+    // Initialize documentation cache
+    try docs.init(allocator);
+
     var app = try zigmund.App.init(allocator, .{
         .title = "Zigmund",
         .version = "0.1.0",
+        .docs_url = null, // Disable built-in Swagger UI — we use /docs for documentation
     });
     defer app.deinit();
 
@@ -29,6 +34,22 @@ pub fn main() !void {
 fn buildRoutes(app: *zigmund.App) !void {
     try app.get("/", pages.home, .{
         .summary = "Homepage",
+    });
+
+    // Documentation routes
+    try app.get("/docs", docs.docsLanding, .{
+        .summary = "Documentation",
+    });
+    try app.get("/docs/{doc_path:path}", docs.docsHandler, .{
+        .summary = "Documentation page",
+    });
+
+    // Learn routes
+    try app.get("/learn", docs.learnLanding, .{
+        .summary = "Learn",
+    });
+    try app.get("/learn/{doc_path:path}", docs.learnHandler, .{
+        .summary = "Learn page",
     });
 
     try app.get("/health", healthCheck, .{
@@ -86,21 +107,36 @@ fn robotsTxt(_: *zigmund.Request, _: std.mem.Allocator) !zigmund.Response {
     );
 }
 
-fn sitemapXml(_: *zigmund.Request, _: std.mem.Allocator) !zigmund.Response {
+fn sitemapXml(_: *zigmund.Request, alloc: std.mem.Allocator) !zigmund.Response {
+    const doc_entries = docs.sitemapEntries(alloc) catch "";
+
+    const body = try std.fmt.allocPrint(alloc,
+        \\<?xml version="1.0" encoding="UTF-8"?>
+        \\<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        \\  <url>
+        \\    <loc>https://zigmund.io/</loc>
+        \\    <lastmod>2026-03-14</lastmod>
+        \\    <changefreq>weekly</changefreq>
+        \\    <priority>1.0</priority>
+        \\  </url>
+        \\  <url>
+        \\    <loc>https://zigmund.io/docs</loc>
+        \\    <changefreq>weekly</changefreq>
+        \\    <priority>0.9</priority>
+        \\  </url>
+        \\  <url>
+        \\    <loc>https://zigmund.io/learn</loc>
+        \\    <changefreq>weekly</changefreq>
+        \\    <priority>0.9</priority>
+        \\  </url>
+        \\{s}</urlset>
+        \\
+    , .{doc_entries});
+
     return .{
         .status = .ok,
-        .body =
-            \\<?xml version="1.0" encoding="UTF-8"?>
-            \\<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            \\  <url>
-            \\    <loc>https://zigmund.io/</loc>
-            \\    <lastmod>2026-02-28</lastmod>
-            \\    <changefreq>weekly</changefreq>
-            \\    <priority>1.0</priority>
-            \\  </url>
-            \\</urlset>
-            \\
-        ,
+        .body = body,
         .content_type = "application/xml; charset=utf-8",
+        .owned_body = body,
     };
 }

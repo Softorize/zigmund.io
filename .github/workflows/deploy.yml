@@ -9,14 +9,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup Zig
         uses: mlugg/setup-zig@v2
         with:
           version: 0.15.2
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y libssl-dev zlib1g-dev
+
+      - name: Build documentation
+        run: |
+          pip install markdown
+          python3 scripts/build_docs.py
 
       - name: Build
         run: zig build -Doptimize=ReleaseSafe
@@ -44,6 +56,16 @@ jobs:
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             public/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/public/
+
+          # Upload content (generated docs)
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            content/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/content/
+
+          # Upload templates
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            templates/ \
+            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/templates/
 
           # Restart and verify
           $SSH_CMD "chmod +x /opt/zigmund-website/zig-out/bin/zigmund-website && systemctl start zigmund-website && sleep 2 && curl -sf http://localhost:3000/health"

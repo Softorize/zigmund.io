@@ -1,0 +1,53 @@
+{% include "base_head.html" %}
+
+<section class="docs-landing">
+  <div class="container">
+    <div class="docs-landing-header">
+      <div class="terminal-window">
+        <div class="terminal-bar">
+          <div class="terminal-buttons">
+            <span class="tbtn tbtn-close"></span>
+            <span class="tbtn tbtn-min"></span>
+            <span class="tbtn tbtn-max"></span>
+          </div>
+          <div class="terminal-title">zigmund@docs: ~</div>
+          <div class="terminal-bar-right"></div>
+        </div>
+        <div class="terminal-body">
+          <p class="terminal-tagline">
+            <span class="prompt-user">zigmund</span><span class="prompt-at">@</span><span class="prompt-host">docs</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$</span> <span class="typing">cat /docs/README_</span>
+          </p>
+        </div>
+      </div>
+      <h1 class="section-title" style="margin-top: 32px;">
+        <span class="title-deco">---</span>
+        <span class="title-bracket">[</span> DOCUMENTATION <span class="title-bracket">]</span>
+        <span class="title-deco">---</span>
+      </h1>
+      <p class="docs-landing-sub">Everything you need to build with Zigmund. {{ total_pages }} pages of guides, references, and examples.</p>
+    </div>
+
+    <div class="docs-sections-grid">
+      {% for section in sections %}
+      <a href="/docs/{{ section.first_page }}" class="docs-section-card">
+        <div class="docs-section-icon">{{ section.icon }}</div>
+        <h2>{{ section.title }}</h2>
+        <p>{{ section.description }}</p>
+        <div class="docs-section-meta">
+          <span class="docs-section-count">{{ section.count }} pages</span>
+          <span class="docs-section-arrow">→</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    <div class="docs-landing-cta">
+      <h2 class="section-title" style="font-size: 24px; margin-bottom: 24px;">
+        <span class="title-bracket">[</span> NEW TO ZIGMUND? <span class="title-bracket">]</span>
+      </h2>
+      <p>Start with the <a href="/learn" class="docs-inline-link">guided learning path</a> for a structured introduction, or jump straight into the <a href="/docs/tutorial/first-steps" class="docs-inline-link">first steps tutorial</a>.</p>
+    </div>
+  </div>
+</section>
+
+{% include "base_footer.html" %}
