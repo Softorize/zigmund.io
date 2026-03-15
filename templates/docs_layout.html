@@ -1,0 +1,59 @@
+{% include "base_head.html" %}
+
+<div class="docs-container">
+  <!-- Sidebar -->
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="docs-sidebar-inner">
+      <div class="docs-search">
+        <input type="text" id="docs-search-input" placeholder="Search docs..." autocomplete="off">
+        <div class="docs-search-results" id="docs-search-results"></div>
+      </div>
+
+      {{ sidebar_html|safe }}
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="docs-main">
+    <!-- Breadcrumb -->
+    <div class="docs-breadcrumb">
+      <a href="/docs">docs</a>
+      {% if section_title %}
+        <span class="docs-breadcrumb-sep">&gt;</span>
+        <a href="/docs/{{ section_slug }}">{{ section_title|lower }}</a>
+      {% endif %}
+      <span class="docs-breadcrumb-sep">&gt;</span>
+      <span class="docs-breadcrumb-current">{{ title|lower }}</span>
+    </div>
+
+    <!-- Article -->
+    <article class="docs-article">
+      {{ content|safe }}
+    </article>
+
+    <!-- Pagination -->
+    <nav class="docs-pagination">
+      {% if has_prev %}
+      <a href="{{ prev_url }}" class="docs-pagination-btn docs-pagination-prev">
+        <span class="docs-pagination-dir">← Previous</span>
+        <span class="docs-pagination-title">{{ prev_title }}</span>
+      </a>
+      {% else %}
+      <div></div>
+      {% endif %}
+      {% if has_next %}
+      <a href="{{ next_url }}" class="docs-pagination-btn docs-pagination-next">
+        <span class="docs-pagination-dir">Next →</span>
+        <span class="docs-pagination-title">{{ next_title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+  </main>
+</div>
+
+<!-- Mobile sidebar toggle -->
+<button class="docs-sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar" onclick="document.getElementById('docs-sidebar').classList.toggle('docs-sidebar-open')">☰ Menu</button>
+
+<script src="/static/js/docs.js"></script>
+
+{% include "base_footer.html" %}

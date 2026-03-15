@@ -79,6 +79,8 @@ const homepage_html =
     \\        <span class="logo-ver">v0.1.0</span>
     \\      </a>
     \\      <div class="nav-links">
+    \\        <a href="/learn">Learn</a>
+    \\        <a href="/docs">Docs</a>
     \\        <a href="#features">Features</a>
     \\        <a href="#quickstart">Quick Start</a>
     \\        <a href="https://github.com/Softorize/zigmund" target="_blank" rel="noopener">
@@ -86,6 +88,7 @@ const homepage_html =
     \\          <span class="ext-icon">↗</span>
     \\        </a>
     \\      </div>
+    \\      <button class="nav-mobile-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('nav-links-open')">☰</button>
     \\    </div>
     \\  </nav>
     \\
@@ -314,6 +317,8 @@ const homepage_html =
     \\          <span class="logo-icon">⚡</span> zigmund
     \\        </div>
     \\        <div class="footer-links">
+    \\          <a href="/learn">Learn</a>
+    \\          <a href="/docs">Docs</a>
     \\          <a href="https://github.com/Softorize/zigmund" target="_blank" rel="noopener">GitHub</a>
     \\          <a href="https://github.com/Softorize/zigmund/issues" target="_blank" rel="noopener">Issues</a>
     \\          <a href="https://github.com/Softorize" target="_blank" rel="noopener">Softorize</a>

@@ -1,0 +1,3 @@
+[submodule "vendor/zigmund"]
+	path = vendor/zigmund
+	url = https://github.com/Softorize/zigmund.git
