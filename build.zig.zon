@@ -6,7 +6,7 @@
     .dependencies = .{
         .zigmund = .{
             .url = "https://github.com/Softorize/zigmund/archive/refs/heads/main.tar.gz",
-            .hash = "zigmund-0.1.0-z8N3ErT1XgBPIFUi1ZE_bABbU4lvyJ0EGlQzL0fk8yy5",
+            .hash = "zigmund-0.1.0-z8N3Ej0NYgBq9jaOM8VMdnZrHY4S_W_j8Bb1LxAs-mga",
         },
     },
     .paths = .{
