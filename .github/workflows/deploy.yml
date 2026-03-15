@@ -67,7 +67,18 @@ jobs:
             templates/ \
             ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/zigmund-website/templates/
 
-          # Restart and verify
-          $SSH_CMD "chmod +x /opt/zigmund-website/zig-out/bin/zigmund-website && systemctl start zigmund-website && sleep 2 && curl -sf http://localhost:3000/health"
+          # Restart service
+          $SSH_CMD "chmod +x /opt/zigmund-website/zig-out/bin/zigmund-website && systemctl start zigmund-website"
 
-          echo "Deploy successful!"
+          # Wait for service to start (loading 111 doc pages takes a moment)
+          for i in 1 2 3 4 5; do
+            sleep 3
+            if $SSH_CMD "curl -sf http://localhost:3000/health" > /dev/null 2>&1; then
+              echo "Deploy successful! Health check passed on attempt $i"
+              exit 0
+            fi
+            echo "Health check attempt $i failed, retrying..."
+          done
+
+          # Final attempt with output for debugging
+          $SSH_CMD "curl -sf http://localhost:3000/health || (journalctl -u zigmund-website --no-pager -n 20 && exit 1)"
