@@ -28,6 +28,10 @@ pub fn main() !void {
     try app.serve(.{
         .host = "0.0.0.0",
         .port = 3000,
+        .max_connections = 512,
+        .header_timeout_ms = 5_000,
+        .body_timeout_ms = 5_000,
+        .idle_timeout_ms = 15_000,
     });
 }
 
